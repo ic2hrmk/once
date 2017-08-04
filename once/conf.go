@@ -4,7 +4,6 @@ import (
 	"github.com/garyburd/redigo/redis"
 	"time"
 	"errors"
-	"log"
 )
 
 type Configuration struct {
@@ -27,12 +26,6 @@ func InitOnce(conf *Configuration) (err error) {
 	initDomain(conf.Domain)
 
 	err = initRedisPool(conf.RedisConf)
-	if err != nil {
-		return
-	}
-
-	log.Println("Once.init: done")
-	log.Println(domain)
 
 	return
 }

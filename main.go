@@ -19,7 +19,8 @@ func main(){
 		log.Fatal(err.Error())
 	}
 
-	log.Println(*configuration.OnceConfiguration)
+	log.Println(configuration.OnceConfiguration.Domain)
+	log.Println(*configuration.OnceConfiguration.RedisConf)
 
 	err = once.InitOnce(configuration.OnceConfiguration)
 	if err != nil {
