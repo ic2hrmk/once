@@ -4,6 +4,12 @@ import (
 	"github.com/garyburd/redigo/redis"
 	"time"
 	"errors"
+	"strconv"
+)
+
+var (
+	domain string
+	redisPool *redis.Pool
 )
 
 type Configuration struct {
@@ -44,7 +50,7 @@ func initRedisPool(redisConf *RedisConfiguration) (err error) {
 		MaxIdle:     1,
 		IdleTimeout: 5,
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", redisConf.Host)
+			c, err := redis.Dial("tcp", redisConf.Host + ":" + strconv.Itoa(redisConf.Port))
 			if err != nil {
 				return nil, err
 			}
